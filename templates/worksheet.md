@@ -1,6 +1,6 @@
-# Worksheet — [Tên sản phẩm]
+# Worksheet — Trợ lý AI tư vấn tuyển sinh ngoài giờ
 
-Họ tên: … · MSSV: … · Ngày làm: …
+Họ tên: Nguyễn Ngọc Linh · MSSV: 2A202602480 · Ngày làm: 9/10/2026
 
 ## Trạm 1 — Loại mô hình
 
