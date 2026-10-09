@@ -46,24 +46,44 @@ Họ tên: … · MSSV: … · Ngày làm: …
 
 | # | Đèn | 🟢 | 🟡 | 🔴 | Nguồn [BM]/[MH]/[TB] | Lý do (1 câu) · ngày kiểm tra nếu [BM] |
 |---|---|---|---|---|---|---|
-| 1 | | | | | | |
+| 1 | **Partner activation rate** | ≥60% partner trong cohort go-live đủ 30 ngày có ≥1 end-user thật được AI phản hồi | 30%–<60% | <30% | [TB] Dải khởi điểm đề xuất trong HANDBOOK §3.3 cho B2B2C, không phải benchmark công bố. Chưa có chuẩn phù hợp; đo 2 chu kỳ rồi lấy làm baseline. Lịch: hai cohort 30 ngày liên tiếp, tính từ ngày pilot partner đầu tiên go-live. | Dải khởi điểm cùng loại mô hình giúp phát hiện partner ký/go-live nhưng không đưa được end-user vào dùng; cần kiểm tra lại bằng 2 cohort thật trước khi coi là ngưỡng ổn định. |
+| 2 | **End-user reach trong partner** | ≥B% (B = reach gộp của 2 tuần baseline đầu tiên có hoạt động end-user thật) | <B% trong 1 tuần đo | <B% trong 2 tuần liên tiếp | [TB] Chưa có chuẩn phù hợp; đo 2 chu kỳ rồi lấy làm baseline. Lịch: bắt đầu sau pilot go-live, lấy 2 tuần có hoạt động thật; dùng đúng mẫu số end-user đủ điều kiện của từng partner. | Dùng baseline reach của cùng sản phẩm, partner và định nghĩa tuần; tuần không có end-user hoạt động là chưa đủ dữ liệu chứ không tính là xanh, một tuần dưới baseline cảnh báo và hai tuần liên tiếp cho thấy suy giảm bền hơn. |
+| 3 | **Số hội thoại tính phí/partner** | ≥V̄ (V̄ = số hội thoại/partner/tuần trung bình của 2 tuần baseline đầu tiên có hội thoại tính phí) | <V̄ trong 1 tuần đo | <V̄ trong 2 tuần liên tiếp | [TB] Chưa có chuẩn phù hợp; đo 2 chu kỳ rồi lấy làm baseline. Lịch: bắt đầu sau pilot go-live, lấy 2 tuần có hội thoại thật; mỗi hội thoại dùng cùng định nghĩa `conversation_id`/24 giờ tại Trạm 2. | So sánh với baseline cùng partner và cùng cửa sổ tuần để phát hiện volume hụt; tuần chưa có hội thoại để lập baseline là thiếu dữ liệu, còn ngưỡng này chỉ đo ổn định sử dụng chứ chưa chứng minh hiệu quả kinh tế khi F/u còn chưa chốt. |
+| 4 | **Chi phí inference ÷ doanh thu — theo TỪNG partner** | ≤2,84% doanh thu partner/kỳ (mốc mô hình stress B) | >2,84% đến ≤9,84% | >9,84% | [MH] Day 22, kịch bản stress B; ngưỡng đỏ suy từ GM mục tiêu 60%. Phép tính ở Phụ lục [MH] 1. | Mức 2,84% là chi phí API + infra + retry stress B so với doanh thu stress; 9,84% là phần inference tối đa còn lại sau COGS khác nếu giữ GM ≥60%; đây là ngưỡng thiết kế có điều kiện vì stress B tính doanh thu trên job hoàn thành, khác mẫu hội thoại Hybrid có thể gồm handoff. |
+| 5 | **Chất lượng nhìn từ end-user (tỷ lệ hội thoại đạt eval)** | ≥Q̄ và không có lỗi nghiêm trọng (Q̄ = tỷ lệ đạt gộp của 2 chu kỳ eval đầu) | <Q̄ trong 1 chu kỳ, không có lỗi nghiêm trọng | Có ≥1 lỗi nghiêm trọng về thông tin tuyển sinh/học phí/hạn chót; hoặc <Q̄ trong 2 chu kỳ liên tiếp | [TB] Chưa có chuẩn phù hợp; đo 2 chu kỳ rồi lấy làm baseline. Lịch: 2 chu kỳ eval đầu sau khi pilot có hội thoại thật; tối thiểu 100 ca eval theo kế hoạch đo ở PDF Day 22. | Baseline Q̄ lấy từ chính dữ liệu eval đã review; lỗi nghiêm trọng có ngưỡng bằng 1 vì thông tin sai về tuyển sinh có thể trực tiếp gây hại cho người tư vấn, còn một chu kỳ giảm đơn lẻ chỉ cần cảnh báo. |
+| 6 | **Doanh thu/partner** | ≥$5.670/partner/quý đủ kỳ (stress B giữ nguyên 3 tháng) | $4.678,05 đến <$5.670/partner/quý | <$4.678,05/partner/quý | [MH] Day 22, stress B; mức tối thiểu suy từ COGS và GM mục tiêu 60%, vùng xanh neo tại doanh thu stress B. Phép tính ở Phụ lục [MH] 2. | Mức đỏ là doanh thu tối thiểu để COGS stress B $623,74/tháng đạt GM 60%; xanh neo tại doanh thu stress B $1.890/tháng quy đổi đủ quý; vàng nằm giữa sàn khả thi và stress case. Chỉ áp dụng nếu cùng partner, workload, kỳ đủ quý. |
+| 7 | **Partner NRR** | ≥max(100%, Bₙ) (Bₙ = NRR baseline gộp của 2 quý gia hạn đầu) | ≥100% và <max(100%, Bₙ) | <100% | [TB] Chưa có chuẩn phù hợp; đo 2 chu kỳ rồi lấy làm baseline. Lịch: 2 quý liên tiếp sau khi partner đầu tiên có doanh thu định kỳ và đến kỳ gia hạn. | 100% là điểm hòa vốn doanh thu định kỳ theo định nghĩa NRR; vùng xanh giữ ít nhất doanh thu đầu kỳ và baseline riêng, còn dưới 100% là doanh thu cohort co lại. |
+| 8 | **GM tổng** | ≥67,00% | ≥60,00% đến <67,00% | <60,00% | [MH] Day 22, stress B GM 67,00% và ngưỡng thiết kế tối thiểu GM 60%; phép tính ở Phụ lục [MH] 3. | Xanh giữ mức GM stress B, vàng còn trên ngưỡng sống còn 60%, đỏ xuống dưới mức đó; stress B chưa tính overhead, thuế, phí thanh toán, acquisition hoặc rev-share nên các dải là guardrail thiết kế cần đối chiếu với COGS cùng phạm vi. |
 
 ### Phụ lục [MH] — phép tính (≥2)
 
-**[MH] 1 — <tên đèn>**
+**[MH] 1 — Chi phí inference ÷ doanh thu — theo TỪNG partner**
 
 ```
-Đầu vào (từ mô hình tài chính / Cost/Job của tôi): …
-Phép tính: …
-Kết quả → 🟢 … · 🟡 … · 🔴 …
+Đầu vào từ PDF Day 22, stress B, mỗi tháng: API + infra + retry = $53,74; QA + escalation = $30 + $540 = $570; tổng COGS = $623,74; doanh thu stress = $1,35/job × 1.400 job hoàn thành = $1.890; GM sàn thiết kế = 60%.
+Phép tính mức đang mô hình hóa: inference ratio = $53,74 ÷ $1.890 = 2,8434% ≈ 2,84%.
+Phép tính trần để giữ GM 60% (giả sử các COGS khác giữ nguyên): inference tối đa = (1 − 60%) × $1.890 − $570 = $186; inference ratio tối đa = $186 ÷ $1.890 = 9,8413% ≈ 9,84%.
+Kết quả có điều kiện → 🟢 ≤2,84% · 🟡 >2,84% đến ≤9,84% · 🔴 >9,84%.
+Giới hạn áp dụng: $1.890 được tính trên 1.400 job hoàn thành, còn Value Metric ở Trạm 2 đếm hội thoại có phản hồi AI và gồm handoff; F/u chưa chốt. Vì vậy đây là guardrail stress B, không phải ngưỡng đã xác thực theo doanh thu Hybrid. Khi có pilot, thay doanh thu, cost log, rev-share và overhead thực của cùng partner/kỳ rồi tính lại; không so sánh hai mẫu số khác nhau.
 ```
 
-**[MH] 2 — <tên đèn>**
+**[MH] 2 — Doanh thu/partner**
 
 ```
-Đầu vào: …
-Phép tính: …
-Kết quả → 🟢 … · 🟡 … · 🔴 …
+Đầu vào từ PDF Day 22, stress B: COGS = $623,74/tháng tại workload giả định; GM mục tiêu tối thiểu = 60%; doanh thu stress = $1.890/tháng. Chưa gồm overhead/rev-share và giữ workload cố định.
+Phép tính doanh thu tháng tối thiểu để đạt GM 60%: GM = (doanh thu − COGS) ÷ doanh thu; doanh thu tối thiểu = COGS ÷ (1 − 60%) = $623,74 ÷ 0,40 = $1.559,35/tháng.
+Quy đổi cùng workload đủ quý: sàn đỏ = $1.559,35 × 3 = $4.678,05/partner/quý; mức stress B = $1.890 × 3 = $5.670/partner/quý.
+Kết quả có điều kiện → 🟢 ≥$5.670/quý · 🟡 $4.678,05 đến <$5.670/quý · 🔴 <$4.678,05/quý.
+Giới hạn áp dụng: mức doanh thu tối thiểu giả định COGS stress B $623,74/tháng là COGS của cùng partner ở cùng workload trong đủ quý; giá Hybrid F/u, rev-share, overhead và quy ước ghi nhận thực tế chưa có trong mô hình. Khi có pilot, cập nhật bằng COGS và doanh thu ghi nhận của chính partner; nếu COGS thay đổi theo volume, tính lại mức sàn theo kỳ.
+```
+
+**[MH] 3 — GM tổng**
+
+```
+Đầu vào từ PDF Day 22, stress B: doanh thu = $1.890/tháng; COGS = $623,74/tháng; ngưỡng GM tối thiểu thiết kế = 60%.
+Phép tính GM stress B = ($1.890 − $623,74) ÷ $1.890 × 100% = 66,9979% ≈ 67,00%.
+Vùng màu theo hai mốc của mô hình: 🟢 ≥67,00% (đạt mức stress B) · 🟡 ≥60,00% và <67,00% (trên sàn nhưng dưới stress case) · 🔴 <60,00% (không đạt GM tối thiểu thiết kế).
+Giới hạn: đây là GM theo stress B trước overhead, thuế, phí thanh toán, acquisition và rev-share, không phải GM thực tế; khi báo cáo GM vận hành, tính đầy đủ chi phí cung cấp dịch vụ trực tiếp và rev-share theo partner, còn chi phí bán hàng/acquisition báo riêng ngoài GM.
 ```
 
 ## Trạm 4 — 5 luật quyết định
